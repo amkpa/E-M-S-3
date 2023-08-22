@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mark Attendance</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5 d-flex justify-content-center align-items-center">
+        <div class="text-center">
+            <h1>Mark Attendance</h1>
+            
+            <form th:object="${attendance}" th:action="@{/attendance/mark}" method="post">
+                <div class="form-group mb-2">
+                    <label for="employee">Employee:</label>
+                    <select id="employee" name="employee.id" th:field="*{employee.id}" class="form-control w-21" required>
+                        <option th:each="emp : ${employees}" th:value="${emp.id}" th:text="${emp.name}"></option>
+                    </select>
+                </div>
+                <div class="form-group mb-2">
+                    <label>Date:</label>
+                    <div class="input-group">
+                        <input type="date" id="date" name="date" th:field="*{date}" th:format="${'yyyy-MM-dd'}" class="form-control w-21">
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <div class="form-check">
+                        <input type="checkbox" id="present" name="present" th:field="*{present}" class="form-check-input">
+                        <label class="form-check-label" for="present">Present</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" style="max-width: 200px;">Submit</button>
+            </form>
+            
+            <a th:href="@{/attendance/report}" class="btn btn-secondary btn-block m-1" style="max-width: 200px;">View Attendance Report</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
